@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=https://github.com/cColds/library.git, initial-scale=1.0">
         <title>Cold's Library</title>
         <link rel="stylesheet" href="styles.css">
-        <script src="scripts.js"></script>
+        <script src="scripts.js" defer></script>
     </head>
 
     <body>
@@ -28,8 +28,8 @@
         </header>
         <main>
             <div class="button-container">
-                <button>+ Add Book</button>
-                <button>Remove All</button>
+                <button class="add-book" id="add-book-id">Add Book</button>
+                <button class="remove-all" class="add-book-id">Remove All</button>
             </div>
 
             <div class="library-info-container">
@@ -37,6 +37,23 @@
                 <div class="explanation">Create a book by clicking <span class="add-book">Add Book</span></div>
             </div>
 
+            <div class="modal-container">
+                <div class="modal">
+
+                    <button class="close">❌</button>
+
+                    <input class="book-title" type="text" value="" placeholder="Title">
+                    <input class="book-author" type="text" value="" placeholder="Author">
+                    <input class="book-pages" type="number" value="" min="1" placeholder="Pages">
+
+                    <label for="read" class="read">Have you read the book?
+                        <input class="book-read" id="read" type="checkbox"></label>
+                    <button class="submit-container">
+                        <div class="submit-button">Submit</div>
+                    </button>
+
+                </div>
+            </div>
         </main>
 
     </body>

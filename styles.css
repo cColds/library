@@ -10,6 +10,9 @@
 
 body {
 	background-color: #001e3c;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
 }
 
 /* HEADER */
@@ -39,7 +42,7 @@ body {
 	gap: 50px;
 }
 
-button {
+.button-container > button {
 	background-color: #007fff;
 	border: none;
 	padding: 1.8rem 1.25rem;
@@ -47,6 +50,8 @@ button {
 	font-weight: bold;
 	font-size: 2rem;
 	cursor: pointer;
+	width: 250px;
+	height: 100px;
 }
 
 button:hover {
@@ -63,11 +68,120 @@ button:hover {
 	margin-top: 50px;
 	font-size: 2.5rem;
 }
-.add-book {
-	font-weight: bold;
-	color: #cbd5e1;
-}
+
 .explanation {
 	font-size: 1.5rem;
 	color: #cbd5e1;
+}
+
+/* MODAL */
+.modal-container {
+	/* display: flex; */
+	display: none;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+	width: 100vw;
+	height: 100vh;
+}
+.modal {
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 25px;
+	background-color: white;
+
+	width: 450px;
+	height: 450px;
+
+	color: black;
+	border-radius: 10px;
+	box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.modal-container.show {
+	display: flex;
+}
+
+.modal-container.hide {
+	display: none;
+}
+
+.close {
+	color: black;
+	background-color: #64748b;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	border: none;
+	cursor: pointer;
+	margin-left: auto;
+	margin-bottom: auto;
+	margin-top: 10px;
+	margin-right: 10px;
+	font-size: 1.8rem;
+}
+
+.close:hover {
+	opacity: 1;
+	background-color: #94a3b8;
+}
+.read {
+	color: black;
+	display: flex;
+	white-space: nowrap;
+	gap: 15px;
+}
+
+input[type="checkbox"] {
+	/* Double-sized Checkboxes */
+	-ms-transform: scale(2); /* IE */
+	-moz-transform: scale(2); /* FF */
+	-webkit-transform: scale(2); /* Safari and Chrome */
+	-o-transform: scale(2); /* Opera */
+	transform: scale(2);
+	padding: 10px;
+}
+
+input {
+	border: none;
+	border: 2px solid #334155;
+	border-radius: 5px;
+	line-height: 35px;
+	width: 90%;
+	color: black;
+}
+
+input::placeholder {
+	font-size: 1rem;
+	padding-left: 10px;
+}
+
+.submit-container {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+	border: none;
+
+	background-color: transparent;
+}
+
+.submit-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #007fff;
+	padding: 1.8rem 1.25rem;
+
+	border-radius: 15px;
+	font-weight: bold;
+	font-size: 1.3rem;
+	margin-top: 40px;
+	cursor: pointer;
+	width: 250px;
+	height: 50px;
 }
