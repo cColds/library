@@ -7,7 +7,11 @@
 		sans-serif;
 	color: white;
 }
-
+:root {
+	--dark: rgba(19, 19, 21, 0.6);
+	--lightblue: rgba(73, 133, 224, 0.12);
+	--blue: #3650cc;
+}
 body {
 	background-color: #001e3c;
 	display: flex;
@@ -96,8 +100,8 @@ button:hover {
 	gap: 25px;
 	background-color: white;
 
-	width: 450px;
-	height: 450px;
+	width: 500px;
+	height: 500px;
 
 	color: black;
 	border-radius: 10px;
@@ -111,30 +115,45 @@ button:hover {
 	display: none;
 }
 
-.close {
+.modal-header {
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+
+.modal-title {
 	color: black;
-	background-color: #64748b;
+	font-size: 2rem;
+}
+
+.close {
+	background-color: #007fff;
 	border-radius: 50%;
-	width: 50px;
-	height: 50px;
+	min-width: 50px;
+	min-height: 50px;
 	border: none;
 	cursor: pointer;
-	margin-left: auto;
-	margin-bottom: auto;
 	margin-top: 10px;
-	margin-right: 10px;
+	margin-right: 5px;
 	font-size: 1.8rem;
+	margin-left: auto;
 }
 
 .close:hover {
-	opacity: 1;
-	background-color: #94a3b8;
+	opacity: 0.9;
 }
 .read {
 	color: black;
 	display: flex;
 	white-space: nowrap;
 	gap: 15px;
+	font-size: 1.2rem;
+}
+
+.error {
+	color: red;
 }
 
 input[type="checkbox"] {
@@ -149,11 +168,20 @@ input[type="checkbox"] {
 
 input {
 	border: none;
-	border: 2px solid #334155;
-	border-radius: 5px;
+	border-bottom: 0.125rem solid var(--dark);
+
 	line-height: 35px;
 	width: 90%;
 	color: black;
+}
+
+input:hover {
+	background-color: var(--lightblue);
+}
+
+input:focus {
+	outline: none;
+	border-bottom: 0.125rem solid var(--blue);
 }
 
 input::placeholder {
@@ -164,9 +192,10 @@ input::placeholder {
 .submit-container {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 20px;
+	/* margin-bottom: 20px; */
 	border: none;
-
+	align-items: center;
+	margin-bottom: 20px;
 	background-color: transparent;
 }
 
@@ -180,7 +209,7 @@ input::placeholder {
 	border-radius: 15px;
 	font-weight: bold;
 	font-size: 1.3rem;
-	margin-top: 40px;
+
 	cursor: pointer;
 	width: 250px;
 	height: 50px;

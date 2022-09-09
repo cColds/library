@@ -39,15 +39,18 @@
 
             <div class="modal-container">
                 <div class="modal">
+                    <div class="modal-header"><button class="close">❌</button>
+                        <div class="modal-title">Add book </div>
 
-                    <button class="close">❌</button>
+                    </div>
 
-                    <input class="book-title" type="text" value="" placeholder="Title">
-                    <input class="book-author" type="text" value="" placeholder="Author">
-                    <input class="book-pages" type="number" value="" min="1" placeholder="Pages">
+                    <input class="book-title" type="text" value="" placeholder="Title" required>
+                    <input class="book-author" type="text" value="" placeholder="Author" required>
+                    <input class="book-pages" type="number" value="" min="1" placeholder="Pages" required>
 
                     <label for="read" class="read">Have you read the book?
                         <input class="book-read" id="read" type="checkbox"></label>
+                    <div class="error"></div>
                     <button class="submit-container">
                         <div class="submit-button">Submit</div>
                     </button>
