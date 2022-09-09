@@ -14,10 +14,10 @@ function showModal() {
 }
 
 closeModal.addEventListener("click", () => {
-	clearText();
-
+	clearValues();
 	hideModal();
 });
+
 function hideModal() {
 	modal.classList.toggle("show");
 }
@@ -25,11 +25,11 @@ function hideModal() {
 function isFormValid() {
 	if (bookTitle.value && bookAuthor.value && bookPages.value) {
 		hideModal();
-		clearText();
+		clearValues();
 	} else errorText.textContent = "*All fields must be filled";
 }
 
-function clearText() {
+function clearValues() {
 	bookTitle.value = "";
 	bookAuthor.value = "";
 	bookPages.value = "";
