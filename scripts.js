@@ -5,6 +5,7 @@ const bookTitle = document.querySelector(".book-title");
 const bookAuthor = document.querySelector(".book-author");
 const bookPages = document.querySelector(".book-pages");
 const checkbox = document.querySelector(".book-read");
+let bookRead = false;
 const errorText = document.querySelector(".error");
 const submitButton = document.querySelector(".submit-button");
 
@@ -48,43 +49,89 @@ function clearValues() {
 
 const library = [];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, id) {
 	this.title = title;
 	this.author = author;
 	this.pages = pages;
 	this.read = read;
+	this.id = id;
 }
 
-Book.prototype.readstatus = function (readCard, readCardClass, readButton) {
+Book.prototype.readstatus = function (
+	readCard,
+	readCardClass,
+	readButton,
+	bookNumber
+) {
+	if (readButton) {
+		if (
+			!readCard &&
+			!readCardClass &&
+			readButton.classList.contains("not-read")
+		) {
+			readButton.textContent = "Read";
+			readButton.classList.remove("not-read");
+			library[bookNumber].read = true;
+
+			return;
+		} else if (!readCard && !readCardClass) {
+			readButton.classList.add("not-read");
+			readButton.textContent = "Not Read";
+			library[bookNumber].read = false;
+
+			return;
+		}
+	}
 	//library
 	const num = library.length - 1;
-	if (!readCardClass.classList.toString().startsWith("card"))
+	if (!readCardClass.classList.toString().startsWith("card") && !readButton)
 		readCardClass.classList.add(`card-${num + 1}`);
 
-	if (library[library.length - 1].read) {
+	if (library[library.length - 1].read && !readButton) {
 		readCard = "Read";
 		readCardClass.classList.remove("not-read");
 		return readCard;
-	} else {
+	} else if (!readButton) {
 		readCard = "Not Read";
 		readCardClass.classList.add("not-read");
 		return readCard;
 	}
 };
+//
 
 function addBookToLibrary() {
+	bookRead = checkbox.checked;
+	let id = 0;
 	const book = new Book(
 		bookTitle.value,
 		bookAuthor.value,
 		bookPages.value,
-		checkbox.checked
+		bookRead,
+		id
 	);
+
 	library.push(book);
+	console.log(book.author);
+
 	toggleLibraryText.classList.add("hide");
-	addCard(book.title, book.author, bookPages.value);
+	loopLibrary(id);
 }
 
-function addCard(title, author, pages) {
+function loopLibrary(id) {
+	let index = 1;
+
+	for (const book of library) {
+		if (index !== library.length) {
+			index++;
+			id++;
+			continue;
+		}
+
+		addCard(book.title, book.author, bookPages.value, bookRead, id);
+	}
+}
+
+function addCard(title, author, pages, read, identifier) {
 	const cardContainer = document.querySelector(".card-container");
 	const card = document.createElement("div");
 	const removeCard = document.createElement("button");
@@ -108,18 +155,16 @@ function addCard(title, author, pages) {
 		readCard.textContent,
 		readCard
 	);
-	// console.log(e.target.classList[1])
-	readCard.onclick = (e) => {
-		if (e.target.classList[2] == "not-read") {
-			e.target.textContent = "Read";
-			e.target.classList.remove("not-read");
-		} else {
-			e.target.classList.add("not-read");
-			e.target.textContent = "Not Read";
-		}
-	};
+	readCard.onclick = (e) =>
+		library[0].readstatus("", "", e.target, identifier);
+	readCard.setAttribute("id", identifier);
+	removeCard.addEventListener("click", removeCardItem);
+
 	cardInfo.append(titleCard, authorCard, pagesCard, readCard);
 	card.append(removeCard, cardInfo);
 	card.classList.add("card");
 	cardContainer.append(card);
+}
+function removeCardItem() {
+	console.log("fajf");
 }
