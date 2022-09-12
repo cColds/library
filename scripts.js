@@ -34,7 +34,7 @@ function clearValues() {
 	bookTitle.value = "";
 	bookAuthor.value = "";
 	bookPages.value = "";
-	errorText.textContent = "";
+	errorText.textContent = "⠀";
 	checkbox.checked = false;
 }
 // create books
@@ -152,11 +152,13 @@ function addCard(title, author, pages, read, identifier) {
 		library.splice(identifier, 1);
 		card.remove();
 		card.innerHTML = "";
+		if (!library.length) toggleLibraryText.classList.remove("hide");
 	});
 
 	removeAllBooks.addEventListener("click", () => {
 		library.length = 0;
 		cardContainer.innerHTML = "";
+		toggleLibraryText.classList.remove("hide");
 	});
 
 	// append cards
