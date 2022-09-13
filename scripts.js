@@ -72,15 +72,12 @@ Book.prototype.readstatus = function (
 			return;
 		}
 	}
-	const num = library.length - 1;
-	if (!readCardClass.classList.toString().startsWith("card") && !readButton)
-		readCardClass.classList.add(`card-${num + 1}`);
 
-	if (library[library.length - 1].read && !readButton) {
+	if (library[library.length - 1].read) {
 		readCard = "Read";
 		readCardClass.classList.remove("not-read");
 		return readCard;
-	} else if (!readButton) {
+	} else {
 		readCard = "Not Read";
 		readCardClass.classList.add("not-read");
 		return readCard;
@@ -108,11 +105,11 @@ function loopLibrary(id) {
 			index++;
 			continue;
 		}
-		addCard(book.title, book.author, bookPages.value, bookRead, id);
+		addCard(book.title, book.author, bookPages.value, id);
 	}
 }
 
-function addCard(title, author, pages, read, identifier) {
+function addCard(title, author, pages, identifier) {
 	// creates elements for cards
 	const cardContainer = document.querySelector(".card-container");
 	const card = document.createElement("div");
@@ -123,16 +120,17 @@ function addCard(title, author, pages, read, identifier) {
 	const pagesCard = document.createElement("div");
 	const readCard = document.createElement("button");
 
-	// adds class to elements
+	// add class to elements
 	cardInfo.classList.add("card-info");
 	removeCard.classList.add("remove-card");
+	removeCard.classList.add(`${identifier}`);
 	titleCard.classList.add("title-card");
 	authorCard.classList.add("author-card");
 	pagesCard.classList.add("pages-card");
 	readCard.classList.add("read-card");
 	card.classList.add("card");
 	card.classList.add(`${identifier}`);
-	// adds contents elements
+	// set text content
 	removeCard.textContent = "❌";
 	titleCard.textContent = title;
 	authorCard.textContent = `by ${author}`;
@@ -144,14 +142,20 @@ function addCard(title, author, pages, read, identifier) {
 
 	// events
 	readCard.onclick = (e) => {
-		library[0].readstatus("", "", e.target, identifier);
 		readCard.setAttribute("id", identifier);
+		let j = Number(readCard.id);
+		j = library.length - 1;
+		if (j < 0) j = Number(j + 1);
+
+		library[j].readstatus("", "", e.target, j);
 	};
 
 	removeCard.addEventListener("click", () => {
 		library.splice(identifier, 1);
+		console.log(library);
 		card.remove();
 		card.innerHTML = "";
+		recalculateId(removeCard.classList[1]);
 		if (!library.length) toggleLibraryText.classList.remove("hide");
 	});
 
@@ -165,4 +169,14 @@ function addCard(title, author, pages, read, identifier) {
 	cardInfo.append(titleCard, authorCard, pagesCard, readCard);
 	card.append(removeCard, cardInfo);
 	cardContainer.append(card);
+}
+
+function recalculateId(removeCard) {
+	Object.keys(library).forEach((key) => {
+		library[key].id = key;
+		removeCard = key;
+	});
+	for (let i = 0; i < library.length; i++) {
+		library[i].id = Number(library[i].id);
+	}
 }
