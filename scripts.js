@@ -73,9 +73,11 @@ function addBookToLibrary() {
 
 function loopLibrary() {
 	let index = -1;
+	const cardContainer = document.querySelector(".card-container");
+	cardContainer.innerHTML = "";
 	library.forEach((book) => {
 		// creates elements for cards
-		const cardContainer = document.querySelector(".card-container");
+
 		const card = document.createElement("div");
 		const removeCard = document.createElement("button");
 		const cardInfo = document.createElement("div");
@@ -131,8 +133,4 @@ function loopLibrary() {
 		card.append(removeCard, cardInfo);
 		cardContainer.append(card);
 	});
-
-	// listen to when deleted
-
-	// then
 }
