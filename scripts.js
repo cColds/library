@@ -122,6 +122,14 @@ function loopLibrary() {
 			);
 		});
 
+		removeCard.addEventListener("click", () => {
+			library.splice(bookIndex, 1);
+			card.remove();
+			card.innerHTML = "";
+			if (!library.length) toggleLibraryText.classList.remove("hide");
+			loopLibrary();
+		});
+
 		removeAllBooks.addEventListener("click", () => {
 			library.length = 0;
 			cardContainer.innerHTML = "";
