@@ -42,9 +42,9 @@
                     <div class="modal-header"><button class="close">❌</button>
                         <div class="modal-title">Add book</div>
                     </div>
-                    <input class="book-title" type="text" value="" placeholder="Title" required>
-                    <input class="book-author" type="text" value="" placeholder="Author" required>
-                    <input class="book-pages" type="number" value="" min="1" placeholder="Pages" required>
+                    <input class="book-title" type="text" value="" maxlength="25" placeholder="Title" required>
+                    <input class="book-author" type="text" value="" maxlength="25" placeholder="Author" required>
+                    <input class="book-pages" type="number" value="" min="1" max="50000" placeholder="Pages" required>
 
                     <label for="read" class="read">Have you read the book?
                         <input class="book-read" id="read" type="checkbox"></label>

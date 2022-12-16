@@ -37,28 +37,31 @@ function clearValues() {
 	errorText.textContent = "⠀";
 	isRead.checked = false;
 }
-// create books
+// store books in library and book constructor
 
 const library = [];
-
-function Book(title, author, pages, read) {
-	this.title = title;
-	this.author = author;
-	this.pages = pages;
-	this.read = read;
-}
-
-Book.prototype.readstatus = function (isRead, updateRead) {
-	if (isRead) {
-		updateRead.textContent = "Read";
-		updateRead.classList.remove("not-read");
-		return updateRead.textContent;
-	} else {
+class Book {
+	constructor(title, author, pages, read) {
+		this.title = title;
+		this.author = author;
+		this.pages = pages;
+		this.read = read;
+	}
+	// update read status on click
+	readstatus(isRead, updateRead) {
+		if (isRead) {
+			updateRead.textContent = "Read";
+			updateRead.classList.remove("not-read");
+			return updateRead.textContent;
+		}
 		updateRead.classList.add("not-read");
 		updateRead.textContent = "Not Read";
 		return updateRead.textContent;
 	}
-};
+}
+
+// create books
+
 function addBookToLibrary() {
 	const book = new Book(
 		bookTitle.value,
@@ -70,6 +73,8 @@ function addBookToLibrary() {
 	toggleLibraryText.classList.add("hide");
 	loopLibrary();
 }
+
+// loop library
 
 function loopLibrary() {
 	let index = -1;
@@ -105,7 +110,7 @@ function loopLibrary() {
 		authorCard.textContent = `by ${book.author}`;
 		pagesCard.textContent = `${book.pages} pages`;
 
-		// style intiial read
+		// style intial read
 		if (book.read) {
 			readCard.textContent = "Read";
 			readCard.classList.remove("not-read");
@@ -129,7 +134,6 @@ function loopLibrary() {
 			if (!library.length) toggleLibraryText.classList.remove("hide");
 			loopLibrary();
 		});
-
 		removeAllBooks.addEventListener("click", () => {
 			library.length = 0;
 			cardContainer.innerHTML = "";
