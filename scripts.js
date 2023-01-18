@@ -24,10 +24,12 @@ function clearValues() {
 	errorText.textContent = "⠀";
 	isRead.checked = false;
 }
+
 addBook.addEventListener("click", () => {
 	toggleModal();
 	clearValues();
 });
+
 closeModal.addEventListener("click", toggleModal);
 submitButton.addEventListener("click", () => {
 	if (!isFormValid()) {
@@ -39,8 +41,6 @@ submitButton.addEventListener("click", () => {
 	toggleModal();
 });
 
-// store books in library and book constructor
-
 const library = [];
 class Book {
 	constructor(title, author, pages, read) {
@@ -49,8 +49,7 @@ class Book {
 		this.pages = pages;
 		this.read = read;
 	}
-	// update read status on click
-	readstatus(isRead, updateRead) {
+	readStatus(isRead, updateRead) {
 		if (isRead) {
 			updateRead.textContent = "Read";
 			updateRead.classList.remove("not-read");
@@ -123,7 +122,7 @@ function loopLibrary() {
 		// events
 		readCard.addEventListener("click", () => {
 			library[bookIndex].read = !library[bookIndex].read;
-			readCard.textContent = library[bookIndex].readstatus(
+			readCard.textContent = library[bookIndex].readStatus(
 				book.read,
 				readCard
 			);
