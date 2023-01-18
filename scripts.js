@@ -9,27 +9,14 @@ const isRead = document.querySelector(".book-read");
 const errorText = document.querySelector(".error");
 const submitButton = document.querySelector(".submit-button");
 const toggleLibraryText = document.querySelector(".library-info-container");
-// modals
-addBook.addEventListener("click", toggleModal);
+
 function toggleModal() {
 	modal.classList.toggle("show");
 }
-closeModal.addEventListener("click", () => {
-	clearValues();
-	toggleModal();
-});
-submitButton.addEventListener("click", () => {
-	isFormValid();
-});
-function isFormValid() {
-	if (bookTitle.value && bookAuthor.value && bookPages.value) {
-		addBookToLibrary();
-		toggleModal();
-		clearValues();
-	} else {
-		errorText.textContent = "*All fields must be filled";
-	}
-}
+
+const isFormValid = () =>
+	bookTitle.value && bookAuthor.value && bookPages.value;
+
 function clearValues() {
 	bookTitle.value = "";
 	bookAuthor.value = "";
@@ -37,6 +24,21 @@ function clearValues() {
 	errorText.textContent = "⠀";
 	isRead.checked = false;
 }
+addBook.addEventListener("click", () => {
+	toggleModal();
+	clearValues();
+});
+closeModal.addEventListener("click", toggleModal);
+submitButton.addEventListener("click", () => {
+	if (!isFormValid()) {
+		errorText.textContent = "*All fields must be filled";
+		return;
+	}
+
+	addBookToLibrary();
+	toggleModal();
+});
+
 // store books in library and book constructor
 
 const library = [];
