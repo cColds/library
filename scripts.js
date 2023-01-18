@@ -14,8 +14,13 @@ function toggleModal() {
 	modal.classList.toggle("show");
 }
 
-const isFormValid = () =>
-	bookTitle.value && bookAuthor.value && bookPages.value;
+function isFormValid() {
+	return (
+		bookTitle.validity.valid &&
+		bookAuthor.validity.valid &&
+		bookPages.validity.valid
+	);
+}
 
 function clearValues() {
 	bookTitle.value = "";
@@ -23,6 +28,16 @@ function clearValues() {
 	bookPages.value = "";
 	errorText.textContent = "⠀";
 	isRead.checked = false;
+}
+
+function updateReadCardClassNameAndTextContent(bookIsRead, readCard) {
+	if (bookIsRead) {
+		readCard.textContent = "Read";
+		readCard.classList.remove("not-read");
+	} else {
+		readCard.classList.add("not-read");
+		readCard.textContent = "Not Read";
+	}
 }
 
 addBook.addEventListener("click", () => {
@@ -49,19 +64,7 @@ class Book {
 		this.pages = pages;
 		this.read = read;
 	}
-	readStatus(isRead, updateRead) {
-		if (isRead) {
-			updateRead.textContent = "Read";
-			updateRead.classList.remove("not-read");
-			return updateRead.textContent;
-		}
-		updateRead.classList.add("not-read");
-		updateRead.textContent = "Not Read";
-		return updateRead.textContent;
-	}
 }
-
-// create books
 
 function addBookToLibrary() {
 	const book = new Book(
@@ -75,15 +78,17 @@ function addBookToLibrary() {
 	loopLibrary();
 }
 
-// loop library
+function getBookIndex(e) {
+	const { indexNumber } = e.target.closest("[data-index-number]").dataset;
+	return Number(indexNumber);
+}
 
 function loopLibrary() {
-	let index = -1;
 	const cardContainer = document.querySelector(".card-container");
 	cardContainer.innerHTML = "";
-	library.forEach((book) => {
-		// creates elements for cards
+	let index = -1;
 
+	library.forEach((book) => {
 		const card = document.createElement("div");
 		const removeCard = document.createElement("button");
 		const cardInfo = document.createElement("div");
@@ -92,10 +97,8 @@ function loopLibrary() {
 		const pagesCard = document.createElement("div");
 		const readCard = document.createElement("button");
 
-		card.dataset.indexNumber = `${index + 1}`;
-		const bookIndex = Number(card.dataset.indexNumber);
-		index++;
-		// add class to elements
+		card.dataset.indexNumber = `${(index += 1)}`;
+
 		cardInfo.classList.add("card-info");
 		removeCard.classList.add("remove-card");
 
@@ -105,43 +108,37 @@ function loopLibrary() {
 		readCard.classList.add("read-card");
 		card.classList.add("card");
 
-		// set text content
 		removeCard.textContent = "❌";
 		titleCard.textContent = book.title;
 		authorCard.textContent = `by ${book.author}`;
 		pagesCard.textContent = `${book.pages} pages`;
+		updateReadCardClassNameAndTextContent(book.read, readCard);
 
-		// style intial read
-		if (book.read) {
-			readCard.textContent = "Read";
-			readCard.classList.remove("not-read");
-		} else {
-			readCard.classList.add("not-read");
-			readCard.textContent = "Not Read";
-		}
-		// events
-		readCard.addEventListener("click", () => {
+		readCard.addEventListener("click", (e) => {
+			const bookIndex = getBookIndex(e);
+
 			library[bookIndex].read = !library[bookIndex].read;
-			readCard.textContent = library[bookIndex].readStatus(
-				book.read,
-				readCard
-			);
+			updateReadCardClassNameAndTextContent(book.read, readCard);
 		});
 
-		removeCard.addEventListener("click", () => {
+		removeCard.addEventListener("click", (e) => {
+			const bookIndex = getBookIndex(e);
+
 			library.splice(bookIndex, 1);
 			card.remove();
 			card.innerHTML = "";
+
 			if (!library.length) toggleLibraryText.classList.remove("hide");
+
 			loopLibrary();
 		});
+
 		removeAllBooks.addEventListener("click", () => {
 			library.length = 0;
 			cardContainer.innerHTML = "";
 			toggleLibraryText.classList.remove("hide");
 		});
 
-		// append cards
 		cardInfo.append(titleCard, authorCard, pagesCard, readCard);
 		card.append(removeCard, cardInfo);
 		cardContainer.append(card);
