@@ -1,2 +1,5 @@
 node_modules
 public/main.js
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
