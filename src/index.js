@@ -1,3 +1,23 @@
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import "./styles.css";
+// TODO: Replace the following with your app's Firebase project configuration
+// See: https://firebase.google.com/docs/web/learn-more#config-object
+const firebaseConfig = {
+  apiKey: "AIzaSyAEVQPK27XMkodcV4MVzAngFdnj3TeFYYk",
+  authDomain: "library-ea366.firebaseapp.com",
+  projectId: "library-ea366",
+  storageBucket: "library-ea366.appspot.com",
+  messagingSenderId: "1054822464232",
+  appId: "1:1054822464232:web:e078150f99bbb03dc8a75d",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
+
 const addBook = document.querySelector("#add-book-id");
 const removeAllBooks = document.querySelector(".remove-all");
 const modal = document.querySelector(".modal-container");
