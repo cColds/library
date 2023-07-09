@@ -18,24 +18,33 @@ body {
   flex-direction: column;
 }
 
+button {
+  cursor: pointer;
+  border-radius: 10px;
+}
+
 /* HEADER */
 
 header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: #071a2d;
-  height: 100px;
   position: relative;
   border-bottom: 1px solid #122c48;
-}
-
-.svg-book {
-  position: absolute;
-  left: 40px;
+  height: 70px;
+  padding: 10px 25px;
 }
 
 /* BUTTON */
+
+.login {
+  padding: 15px;
+  color: black;
+  background-color: white;
+  border: 0;
+  padding: 15px 24px;
+}
 
 .button-container {
   display: flex;
