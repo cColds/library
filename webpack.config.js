@@ -7,4 +7,12 @@ module.exports = {
     path: path.resolve(__dirname, "public"),
   },
   mode: "production",
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
 };
