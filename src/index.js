@@ -1,5 +1,18 @@
 import "./handleAuth";
 import "./styles.css";
+import app from "./firebase";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+
+const db = getFirestore(app);
+
+async function addBookToDb(book) {
+  try {
+    const docRef = await addDoc(collection(db, "books"), book);
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
 
 const addBook = document.querySelector("#add-book-id");
 const removeAllBooks = document.querySelector(".remove-all");
@@ -57,6 +70,7 @@ submitButton.addEventListener("click", () => {
 
   addBookToLibrary();
   toggleModal();
+  loopLibrary();
 });
 
 const library = [];
@@ -77,8 +91,8 @@ function addBookToLibrary() {
     isRead.checked
   );
   library.push(book);
+  addBookToDb(Object.assign({}, book));
   toggleLibraryText.classList.add("hide");
-  loopLibrary();
 }
 
 function getBookIndex(e) {
