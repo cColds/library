@@ -38,12 +38,19 @@ header {
 
 /* BUTTON */
 
-.login {
+.login,
+.logout {
   padding: 15px;
   color: black;
   background-color: white;
   border: 0;
   padding: 15px 24px;
+  display: none;
+}
+
+.login.active,
+.logout.active {
+  display: block;
 }
 
 .button-container {

@@ -1,22 +1,43 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 import "./styles.css";
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://firebase.google.com/docs/web/learn-more#config-object
-const firebaseConfig = {
-  apiKey: "AIzaSyAEVQPK27XMkodcV4MVzAngFdnj3TeFYYk",
-  authDomain: "library-ea366.firebaseapp.com",
-  projectId: "library-ea366",
-  storageBucket: "library-ea366.appspot.com",
-  messagingSenderId: "1054822464232",
-  appId: "1:1054822464232:web:e078150f99bbb03dc8a75d",
-};
+import auth from "./firebase";
+const login = document.querySelector(".login");
+const logout = document.querySelector(".logout");
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    login.classList.remove("active");
+    logout.classList.add("active");
+  } else {
+    login.classList.add("active");
+    logout.classList.remove("active");
+  }
+});
 
-// Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+login.addEventListener("click", async () => {
+  try {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+logout.addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    login.classList.add("active");
+    logout.classList.remove("active");
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 const addBook = document.querySelector("#add-book-id");
 const removeAllBooks = document.querySelector(".remove-all");
