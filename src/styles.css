@@ -11,6 +11,12 @@
   --lightblue: rgba(73, 133, 224, 0.12);
   --blue: #3650cc;
 }
+
+html {
+  visibility: visible;
+  opacity: 1;
+}
+
 body {
   background-color: #001e3c;
   display: flex;
