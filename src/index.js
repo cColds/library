@@ -7,6 +7,7 @@ import {
   doc,
   setDoc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 const db = getFirestore(app);
@@ -135,10 +136,16 @@ function loopLibrary() {
     pagesCard.textContent = `${book.pages} pages`;
     updateReadCardClassNameAndTextContent(book.read, readCard);
 
-    readCard.addEventListener("click", (e) => {
+    readCard.addEventListener("click", async (e) => {
       const bookIndex = getBookIndex(e);
+      const booksRef = doc(db, `books/${library[bookIndex].id}`);
+      const toggleRead = !library[bookIndex].read;
+      await updateDoc(booksRef, {
+        read: toggleRead,
+      });
 
-      library[bookIndex].read = !library[bookIndex].read;
+      library[bookIndex].read = toggleRead;
+      console.log("Document updated with ID: ", booksRef.id);
       updateReadCardClassNameAndTextContent(book.read, readCard);
     });
 
