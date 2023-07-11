@@ -1,18 +1,9 @@
 import "./handleAuth";
 import "./styles.css";
 import app from "./firebase";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
 
 const db = getFirestore(app);
-
-async function addBookToDb(book) {
-  try {
-    const docRef = await addDoc(collection(db, "books"), book);
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
-}
 
 const addBook = document.querySelector("#add-book-id");
 const removeAllBooks = document.querySelector(".remove-all");
@@ -62,13 +53,13 @@ addBook.addEventListener("click", () => {
 });
 
 closeModal.addEventListener("click", toggleModal);
-submitButton.addEventListener("click", () => {
+submitButton.addEventListener("click", async () => {
   if (!isFormValid()) {
     errorText.textContent = "*All fields must be filled";
     return;
   }
 
-  addBookToLibrary();
+  await addBookToLibrary();
   toggleModal();
   loopLibrary();
 });
@@ -83,15 +74,22 @@ class Book {
   }
 }
 
-function addBookToLibrary() {
+async function addBookToLibrary() {
   const book = new Book(
     bookTitle.value,
     bookAuthor.value,
     bookPages.value,
     isRead.checked
   );
-  library.push(book);
-  addBookToDb(Object.assign({}, book));
+  const booksRef = doc(collection(db, "books"));
+  const newBookToAdd = Object.assign({}, book, { id: booksRef.id });
+  try {
+    await setDoc(booksRef, newBookToAdd);
+    console.log("Document written with ID: ", booksRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+  library.push(newBookToAdd);
   toggleLibraryText.classList.add("hide");
 }
 
