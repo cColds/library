@@ -8,6 +8,7 @@ import {
 import app from "./firebase";
 
 const auth = getAuth(app);
+
 onAuthStateChanged(auth, (user) => {
   if (user) {
     login.classList.remove("active");
@@ -42,3 +43,4 @@ async function handleLogout() {
 
 login.addEventListener("click", handleLogin);
 logout.addEventListener("click", handleLogout);
+export default auth;

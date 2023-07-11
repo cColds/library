@@ -9,6 +9,7 @@ import {
   deleteDoc,
   updateDoc,
 } from "firebase/firestore";
+import auth from "./handleAuth";
 
 const db = getFirestore(app);
 
@@ -88,7 +89,8 @@ async function addBookToLibrary() {
     bookPages.value,
     isRead.checked
   );
-  const booksRef = doc(collection(db, "books"));
+  const { uid } = auth.currentUser;
+  const booksRef = doc(collection(db, `users/${uid}/books`));
   const newBookToAdd = Object.assign({}, book, { id: booksRef.id });
   try {
     await setDoc(booksRef, newBookToAdd);
@@ -138,7 +140,8 @@ function loopLibrary() {
 
     readCard.addEventListener("click", async (e) => {
       const bookIndex = getBookIndex(e);
-      const booksRef = doc(db, `books/${library[bookIndex].id}`);
+      const { uid } = auth.currentUser;
+      const booksRef = doc(db, `users/${uid}/books/${library[bookIndex].id}`);
       const toggleRead = !library[bookIndex].read;
       await updateDoc(booksRef, {
         read: toggleRead,
@@ -152,7 +155,8 @@ function loopLibrary() {
     removeCard.addEventListener("click", async (e) => {
       const bookIndex = getBookIndex(e);
 
-      const booksRef = doc(db, `books/${library[bookIndex].id}`);
+      const { uid } = auth.currentUser;
+      const booksRef = doc(db, `users/${uid}/books/${library[bookIndex].id}`);
       await deleteDoc(booksRef);
       console.log("Document deleted with ID: ", booksRef.id);
       library.splice(bookIndex, 1);
