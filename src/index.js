@@ -1,7 +1,13 @@
 import "./handleAuth";
 import "./styles.css";
 import app from "./firebase";
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 const db = getFirestore(app);
 
@@ -136,13 +142,15 @@ function loopLibrary() {
       updateReadCardClassNameAndTextContent(book.read, readCard);
     });
 
-    removeCard.addEventListener("click", (e) => {
+    removeCard.addEventListener("click", async (e) => {
       const bookIndex = getBookIndex(e);
 
+      const booksRef = doc(db, `books/${library[bookIndex].id}`);
+      await deleteDoc(booksRef);
+      console.log("Document deleted with ID: ", booksRef.id);
       library.splice(bookIndex, 1);
       card.remove();
       card.innerHTML = "";
-
       if (!library.length) toggleLibraryText.classList.remove("hide");
 
       loopLibrary();
