@@ -89,16 +89,19 @@ async function addBookToLibrary() {
     bookPages.value,
     isRead.checked
   );
-  const { uid } = auth.currentUser;
-  const booksRef = doc(collection(db, `users/${uid}/books`));
-  const newBookToAdd = Object.assign({}, book, { id: booksRef.id });
+
   try {
+    const uid = auth.currentUser.uid;
+    const booksRef = doc(collection(db, `users/${uid}/books`));
+    const newBookToAdd = Object.assign({}, book, { id: booksRef.id });
     await setDoc(booksRef, newBookToAdd);
+    library.push(newBookToAdd);
     console.log("Document written with ID: ", booksRef.id);
   } catch (e) {
-    console.error("Error adding document: ", e);
+    console.error(e);
+    library.push(book);
   }
-  library.push(newBookToAdd);
+  console.log(library);
   toggleLibraryText.classList.add("hide");
 }
 
