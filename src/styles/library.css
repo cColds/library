@@ -1,0 +1,32 @@
+.add-book {
+  background-color: #007fff;
+  display: flex;
+  justify-self: center;
+  margin-top: 50px;
+  font-size: 1.2rem;
+}
+
+/* LIBRARY INFO */
+
+.library-info-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 25px;
+  gap: 10px;
+}
+
+.library-info-container.hide {
+  display: none;
+}
+
+.library-info-container h2 {
+  font-size: 1.75rem;
+}
+
+.explanation {
+  font-size: 1.25rem;
+  color: #cbd5e1;
+  font-weight: normal;
+}

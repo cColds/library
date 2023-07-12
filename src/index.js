@@ -1,6 +1,7 @@
 import "./handleAuth";
 import "./styles/index.css";
 import "./styles/modal.css";
+import "./styles/library.css";
 
 import app from "./firebase";
 import {
@@ -15,8 +16,7 @@ import auth from "./handleAuth";
 
 const db = getFirestore(app);
 
-const addBook = document.querySelector("#add-book-id");
-const removeAllBooks = document.querySelector(".remove-all");
+const addBook = document.querySelector(".add-book");
 const modal = document.querySelector(".modal-container");
 const closeModal = document.querySelector(".close");
 const bookTitle = document.querySelector(".book-title");
@@ -150,12 +150,6 @@ function loopLibrary() {
       if (!library.length) toggleLibraryText.classList.remove("hide");
 
       loopLibrary();
-    });
-
-    removeAllBooks.addEventListener("click", () => {
-      library.length = 0;
-      cardContainer.innerHTML = "";
-      toggleLibraryText.classList.remove("hide");
     });
 
     cardInfo.append(titleCard, authorCard, pagesCard, readCard);
