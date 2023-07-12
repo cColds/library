@@ -87,6 +87,12 @@ header {
   padding: 10px 25px;
 }
 
+.logo-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 nav {
   display: flex;
   gap: 15px;
@@ -116,4 +122,12 @@ nav {
 .login.active,
 .logout.active {
   display: block;
+}
+
+@media (max-width: 767px) {
+  header {
+    flex-direction: column;
+    gap: 15px;
+    height: auto;
+  }
 }
