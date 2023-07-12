@@ -74,7 +74,7 @@ async function addBookToLibrary() {
   );
 
   try {
-    const uid = auth.currentUser.uid;
+    const { uid } = auth.currentUser;
     const booksRef = doc(collection(db, `users/${uid}/books`));
     const newBookToAdd = Object.assign({}, book, { id: booksRef.id });
     await setDoc(booksRef, newBookToAdd);
@@ -133,25 +133,33 @@ function loopLibrary() {
 
     readCard.addEventListener("click", async (e) => {
       const bookIndex = getBookIndex(e);
-      const { uid } = auth.currentUser;
-      const booksRef = doc(db, `users/${uid}/books/${library[bookIndex].id}`);
       const toggleRead = !library[bookIndex].read;
-      await updateDoc(booksRef, {
-        read: toggleRead,
-      });
+      try {
+        const { uid } = auth.currentUser;
+        const booksRef = doc(db, `users/${uid}/books/${library[bookIndex].id}`);
+        await updateDoc(booksRef, {
+          read: toggleRead,
+        });
+        console.log("Document written with ID: ", booksRef.id);
+      } catch (e) {
+        console.error(e);
+      }
 
       library[bookIndex].read = toggleRead;
-      console.log("Document updated with ID: ", booksRef.id);
       updateReadCardClassNameAndTextContent(book.read, readCard);
     });
 
     removeCard.addEventListener("click", async (e) => {
       const bookIndex = getBookIndex(e);
 
-      const { uid } = auth.currentUser;
-      const booksRef = doc(db, `users/${uid}/books/${library[bookIndex].id}`);
-      await deleteDoc(booksRef);
-      console.log("Document deleted with ID: ", booksRef.id);
+      try {
+        const { uid } = auth.currentUser;
+        const booksRef = doc(db, `users/${uid}/books/${library[bookIndex].id}`);
+        await deleteDoc(booksRef);
+        console.log("Document deleted with ID: ", booksRef.id);
+      } catch (e) {
+        console.error(e);
+      }
       library.splice(bookIndex, 1);
       card.remove();
       card.innerHTML = "";
