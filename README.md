@@ -6,28 +6,33 @@
         <img src="https://img.shields.io/static/v1?label=&message=Javascript&color=F7DF1E&style=for-the-badge&logo=Javascript&logoColor=black&logoWidth=&labelColor=&link=">
         <br>
     </h1>
-    <h3><b><a href="https://ccolds.github.io/library/">View Live Demo</a></b></h3>
+    <h3><b><a href="https://library-ea366.web.app">View Live Demo</a></b></h3>
 </div>
 
-![Library Preview](https://media.discordapp.net/attachments/249554120514600960/1053418671386660954/image.png?width=881&height=503)
+![Library Preview](./public/library.png)
 
 # Features
+
 - Add book
 - Remove Book
-- Toggle read/not read
-- Remove all books
-- Create a book with title, author, pages, and read 
+- Read book functionality
+- Create a book with title, author, pages, and read
+- Store books with Firebase
 
 # Built with
-- HTML 
+
+- HTML
 - CSS
 - JavaScript
+- Webpack
+- Firebase
 
 # Description
+
 A library app. You can create, delete, and read books.
 
-
 # What I learned
+
 - Object constructors
 - Prototypes and prototypal inheritance
 - "this" keyword
