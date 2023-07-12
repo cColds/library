@@ -36,7 +36,9 @@ onAuthStateChanged(auth, async (user) => {
     loopLibrary();
     login.classList.remove("active");
     logout.classList.add("active");
-    toggleLibraryText.classList.add("hide");
+    if (library.length) {
+      toggleLibraryText.classList.add("hide");
+    }
   } else {
     login.classList.add("active");
     logout.classList.remove("active");
