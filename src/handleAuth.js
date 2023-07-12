@@ -25,6 +25,7 @@ const toggleLibraryText = document.querySelector(".library-info-container");
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
+    library.length = 0;
     const docRef = doc(db, `users/${user.uid}`);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) await setDoc(doc(db, docRef.path), {});
