@@ -118,6 +118,7 @@ header {
   flex-direction: column;
   margin-top: 50px;
   font-size: 2.5rem;
+  gap: 10px;
 }
 
 .library-info-container.hide {
