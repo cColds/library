@@ -28,6 +28,15 @@ button {
   border: 0;
   border-radius: 10px;
   padding: 16px 24px;
+  transition: 0.2s ease-in-out;
+}
+
+button:active {
+  scale: 0.95;
+}
+
+button:hover {
+  opacity: 0.9;
 }
 
 input[type="checkbox"] {
