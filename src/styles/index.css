@@ -59,8 +59,6 @@ input::placeholder {
   font-size: 0.95rem;
 }
 
-/* HEADER */
-
 header {
   display: flex;
   justify-content: space-between;
@@ -72,15 +70,10 @@ header {
   padding: 10px 25px;
 }
 
-/* BUTTON */
-
 .login,
 .logout {
-  padding: 15px;
-  color: black;
-  background-color: white;
-  border: 0;
-  padding: 15px 24px;
+  background-color: #2563eb;
+
   display: none;
 }
 
