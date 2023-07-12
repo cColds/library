@@ -20,6 +20,9 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const cardContainer = document.querySelector(".card-container");
 const toggleLibraryText = document.querySelector(".library-info-container");
+const accountInfo = document.querySelector(".account-info");
+const profilePic = document.querySelector(".profile-pic");
+const username = document.querySelector(".username");
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
@@ -35,12 +38,18 @@ onAuthStateChanged(auth, async (user) => {
     loopLibrary();
     login.classList.remove("active");
     logout.classList.add("active");
+    accountInfo.classList.add("active");
+
     if (library.length) {
       toggleLibraryText.classList.add("hide");
     }
+    profilePic.src = user.photoURL;
+    username.textContent = user.displayName;
+    console.log(user);
   } else {
     login.classList.add("active");
     logout.classList.remove("active");
+    accountInfo.classList.remove("active");
     library.length = 0;
     cardContainer.innerHTML = "";
     toggleLibraryText.classList.remove("hide");

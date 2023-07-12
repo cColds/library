@@ -87,11 +87,30 @@ header {
   padding: 10px 25px;
 }
 
+nav {
+  display: flex;
+  gap: 15px;
+}
+
+.account-info {
+  display: none;
+}
+
+.account-info.active {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-pic {
+  border-radius: 50%;
+}
+
 .login,
 .logout {
   background-color: #2563eb;
-
   display: none;
+  padding: 12px 24px;
 }
 
 .login.active,
