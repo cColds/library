@@ -178,3 +178,5 @@ function loopLibrary() {
     cardContainer.append(card);
   });
 }
+
+export { library, loopLibrary };
