@@ -26,7 +26,38 @@ body {
 
 button {
   cursor: pointer;
+  border: 0;
   border-radius: 10px;
+  padding: 16px 24px;
+}
+
+input[type="checkbox"] {
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  padding: 10px;
+}
+
+input {
+  line-height: 35px;
+  color: black;
+  border-radius: 5px;
+  border: 1px solid #e2e8f0;
+  padding-left: 10px;
+}
+
+input:focus {
+  outline: 0;
+}
+
+input:focus-visible {
+  outline: 1px solid #7dd3fc;
+}
+
+input::placeholder {
+  font-size: 0.95rem;
 }
 
 /* HEADER */
@@ -96,142 +127,6 @@ header {
 .explanation {
   font-size: 1.5rem;
   color: #cbd5e1;
-}
-
-/* MODAL */
-.modal-container {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  width: 100vw;
-  height: 100vh;
-}
-
-.modal {
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 25px;
-  background-color: white;
-
-  width: 500px;
-  height: 500px;
-
-  color: black;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-}
-.modal-container.show {
-  display: flex;
-}
-
-.modal-container.hide {
-  display: none;
-}
-
-.modal-header {
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-}
-
-.modal-title {
-  color: black;
-  font-size: 2rem;
-}
-
-.close {
-  background-color: #007fff;
-  border-radius: 50%;
-  min-width: 50px;
-  min-height: 50px;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 5px;
-  font-size: 1.8rem;
-  margin-left: auto;
-}
-
-.close:hover {
-  opacity: 0.9;
-}
-.read {
-  color: black;
-  display: flex;
-  white-space: nowrap;
-  gap: 15px;
-  font-size: 1.2rem;
-}
-
-.error {
-  color: red;
-}
-
-input[type="checkbox"] {
-  /* Double-sized Checkboxes */
-  -ms-transform: scale(2); /* IE */
-  -moz-transform: scale(2); /* FF */
-  -webkit-transform: scale(2); /* Safari and Chrome */
-  -o-transform: scale(2); /* Opera */
-  transform: scale(2);
-  padding: 10px;
-}
-
-input {
-  border: none;
-  border-bottom: 0.125rem solid var(--dark);
-
-  line-height: 35px;
-  width: 90%;
-  color: black;
-}
-
-input:hover {
-  background-color: var(--lightblue);
-}
-
-input:focus {
-  outline: none;
-  border-bottom: 0.125rem solid var(--blue);
-}
-
-input::placeholder {
-  font-size: 1rem;
-  padding-left: 10px;
-}
-
-.submit-container {
-  display: flex;
-  justify-content: center;
-  border: none;
-  align-items: center;
-  margin-bottom: 20px;
-  background-color: transparent;
-}
-
-.submit-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #007fff;
-  padding: 1.8rem 1.25rem;
-
-  border-radius: 15px;
-  font-weight: bold;
-  font-size: 1.3rem;
-
-  cursor: pointer;
-  width: 250px;
-  height: 50px;
 }
 
 /* CARDS */

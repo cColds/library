@@ -1,5 +1,7 @@
 import "./handleAuth";
-import "./styles.css";
+import "./styles/index.css";
+import "./styles/modal.css";
+
 import app from "./firebase";
 import {
   getFirestore,
@@ -21,28 +23,11 @@ const bookTitle = document.querySelector(".book-title");
 const bookAuthor = document.querySelector(".book-author");
 const bookPages = document.querySelector(".book-pages");
 const isRead = document.querySelector(".book-read");
-const errorText = document.querySelector(".error");
-const submitButton = document.querySelector(".submit-button");
+const bookForm = document.querySelector(".book-form");
 const toggleLibraryText = document.querySelector(".library-info-container");
 
 function toggleModal() {
   modal.classList.toggle("show");
-}
-
-function isFormValid() {
-  return (
-    bookTitle.validity.valid &&
-    bookAuthor.validity.valid &&
-    bookPages.validity.valid
-  );
-}
-
-function clearValues() {
-  bookTitle.value = "";
-  bookAuthor.value = "";
-  bookPages.value = "";
-  errorText.textContent = "⠀";
-  isRead.checked = false;
 }
 
 function updateReadCardClassNameAndTextContent(bookIsRead, readCard) {
@@ -57,15 +42,12 @@ function updateReadCardClassNameAndTextContent(bookIsRead, readCard) {
 
 addBook.addEventListener("click", () => {
   toggleModal();
-  clearValues();
+  bookForm.reset();
 });
 
 closeModal.addEventListener("click", toggleModal);
-submitButton.addEventListener("click", async () => {
-  if (!isFormValid()) {
-    errorText.textContent = "*All fields must be filled";
-    return;
-  }
+bookForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
   await addBookToLibrary();
   toggleModal();

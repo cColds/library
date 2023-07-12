@@ -1,0 +1,107 @@
+.modal-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal {
+  background-color: white;
+  width: 500px;
+  color: black;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  padding: 15px;
+  margin: 15px;
+}
+.modal-container.show {
+  display: flex;
+}
+
+.modal-container.hide {
+  display: none;
+}
+
+.modal-header {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.modal-title {
+  color: black;
+}
+
+.close {
+  margin-left: auto;
+  padding: 0;
+  background-color: transparent;
+}
+
+.close svg {
+  width: 24px;
+  height: 24px;
+  fill: #475569;
+}
+
+.close:hover {
+  opacity: 0.9;
+}
+
+.read {
+  color: black;
+  display: flex;
+  white-space: nowrap;
+  gap: 15px;
+  font-size: 1.2rem;
+}
+
+.add-book-form {
+  background-color: #007fff;
+  padding: 12px 24px;
+  width: 150px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-left: auto;
+}
+
+.book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.book-form label,
+.book-form input:not(#read) {
+  width: 100%;
+}
+
+.book-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1rem;
+  color: black;
+}
+
+.book-form .read {
+  display: flex;
+  flex-direction: row;
+  width: min-content;
+  gap: 15px;
+}
+
+.read span {
+  color: black;
+}
