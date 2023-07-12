@@ -6,11 +6,6 @@
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: white;
 }
-:root {
-  --dark: rgba(19, 19, 21, 0.6);
-  --lightblue: rgba(73, 133, 224, 0.12);
-  --blue: #3650cc;
-}
 
 html {
   visibility: visible;
@@ -92,64 +87,4 @@ header {
 .login.active,
 .logout.active {
   display: block;
-}
-
-/* CARDS */
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 0.1fr));
-  gap: 15px;
-
-  margin-top: 20px;
-  justify-content: center;
-}
-
-.card {
-  background: linear-gradient(-45deg, #001f60, #009de0);
-  border-radius: 10px;
-  width: 350px;
-  height: 250px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.remove-card {
-  color: #94a3b8;
-  margin-left: auto;
-  margin-bottom: auto;
-  width: 30px;
-  height: 30px;
-  font-size: 1.5rem;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.read-card {
-  font-size: 1.5rem;
-  width: 300px;
-  height: 50px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  background-color: #16a34a;
-}
-
-.not-read {
-  background-color: #dc2626;
-}
-
-.title-card {
-  font-size: 1.5rem;
-}
-
-.card-info {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
 }

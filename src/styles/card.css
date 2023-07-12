@@ -1,0 +1,73 @@
+.card-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #111827;
+  border-radius: 10px;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
+
+.remove-card svg {
+  width: 24px;
+  height: 24px;
+  fill: #475569;
+}
+
+.remove-card {
+  margin-left: auto;
+  margin-bottom: auto;
+  background-color: transparent;
+  padding: 0;
+}
+
+.read-card {
+  font-size: 1rem;
+  height: 40px;
+  width: 100%;
+  background-color: #16a34a;
+}
+
+.not-read {
+  background-color: #b91c1c;
+}
+
+.read-card,
+.not-read {
+  padding: 8px;
+}
+
+.title-card {
+  font-size: 1.5rem;
+}
+
+.title-card,
+.author-card,
+.pages-card {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
