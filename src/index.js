@@ -69,7 +69,7 @@ async function addBookToLibrary() {
   const book = new Book(
     bookTitle.value,
     bookAuthor.value,
-    bookPages.value,
+    parseInt(bookPages.value),
     isRead.checked
   );
 
