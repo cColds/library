@@ -3,10 +3,30 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      function isSignedIn() {
+        return request.auth != null && request.auth.uid == userId;
+      }
+
+      function arePagesValid() {
+        return request.resource.data.pages > 0 && request.resource.data.pages <= 1500
+      }
+
+      function isTitleValid() {
+        return request.resource.data.title.size() > 0 && request.resource.data.title.size() <= 40
+      }
+
+      function isAuthorValid() {
+        return request.resource.data.author.size() > 0 && request.resource.data.author.size() <= 25
+    }
+
+      allow get, create: if isSignedIn();
       match /books/{book} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow list, update, delete: if isSignedIn();
+      allow create: if isSignedIn() && isTitleValid() && isAuthorValid() && arePagesValid()
+
       }
     }
   }
-}
+} 
+
+ 
