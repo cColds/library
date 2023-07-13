@@ -45,7 +45,6 @@ onAuthStateChanged(auth, async (user) => {
     }
     profilePic.src = user.photoURL;
     username.textContent = user.displayName;
-    console.log(user);
   } else {
     login.classList.add("active");
     logout.classList.remove("active");
@@ -61,11 +60,8 @@ const logout = document.querySelector(".logout");
 async function handleLogin() {
   try {
     const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, provider);
-    console.log("Logged in with result:", result);
-  } catch (error) {
-    console.error(error);
-  }
+    await signInWithPopup(auth, provider);
+  } catch {}
 }
 
 async function handleLogout() {
@@ -73,9 +69,7 @@ async function handleLogout() {
     await signOut(auth);
     login.classList.add("active");
     logout.classList.remove("active");
-  } catch (error) {
-    console.error(error);
-  }
+  } catch {}
 }
 
 login.addEventListener("click", handleLogin);

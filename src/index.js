@@ -79,12 +79,9 @@ async function addBookToLibrary() {
     const newBookToAdd = Object.assign({}, book, { id: booksRef.id });
     await setDoc(booksRef, newBookToAdd);
     library.push(newBookToAdd);
-    console.log("Document written with ID: ", booksRef.id);
-  } catch (e) {
-    console.error(e);
+  } catch {
     library.push(book);
   }
-  console.log(library);
   toggleLibraryText.classList.add("hide");
 }
 
@@ -140,10 +137,7 @@ function loopLibrary() {
         await updateDoc(booksRef, {
           read: toggleRead,
         });
-        console.log("Document written with ID: ", booksRef.id);
-      } catch (e) {
-        console.error(e);
-      }
+      } catch {}
 
       library[bookIndex].read = toggleRead;
       updateReadCardClassNameAndTextContent(book.read, readCard);
@@ -156,10 +150,7 @@ function loopLibrary() {
         const { uid } = auth.currentUser;
         const booksRef = doc(db, `users/${uid}/books/${library[bookIndex].id}`);
         await deleteDoc(booksRef);
-        console.log("Document deleted with ID: ", booksRef.id);
-      } catch (e) {
-        console.error(e);
-      }
+      } catch {}
       library.splice(bookIndex, 1);
       card.remove();
       card.innerHTML = "";
