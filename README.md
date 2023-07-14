@@ -6,7 +6,7 @@
         <img src="https://img.shields.io/static/v1?label=&message=Javascript&color=F7DF1E&style=for-the-badge&logo=Javascript&logoColor=black&logoWidth=&labelColor=&link=">
         <br>
     </h1>
-    <h3><b><a href="https://library-ea366.web.app">View Live Demo</a></b></h3>
+    <h3><b><a href="https://ccolds.github.io/library">View Live Demo</a></b></h3>
 </div>
 
 ![Library Preview](./public/library.png)
