@@ -39,9 +39,10 @@ onAuthStateChanged(auth, async (user) => {
     login.classList.remove("active");
     logout.classList.add("active");
     accountInfo.classList.add("active");
-
     if (library.length) {
       toggleLibraryText.classList.add("hide");
+    } else {
+      toggleLibraryText.classList.remove("hide");
     }
     profilePic.src = user.photoURL;
     username.textContent = user.displayName;
